@@ -9,7 +9,7 @@
     @foreach($movies as $movie)
         <div>
             <a href="{{ "/movies/" . $movie->id}}" >{{ $movie->title }}</a>
-            <p>{{ $movie->storyline }}</p>
+            <p>{{ str_limit($movie->storyline, $limit = 25, $end = '...') }}</p>
         </div>
     @endforeach
 @endsection
