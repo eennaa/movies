@@ -20,3 +20,4 @@ Route::get('/movies/{id}', 'MoviesController@show')->name('single-movie');
 
 Route::get('/add', 'MoviesController@add');
 Route::post('/create', 'MoviesController@create');
+Route::post('/comment/add', 'CommentsController@store');

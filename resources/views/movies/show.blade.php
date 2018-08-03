@@ -23,4 +23,27 @@
             </ul>
         @endforeach
     </div>
+    <form method="POST" action="/comment/add">
+        {{ csrf_field() }}
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="form-group ">
+            <label for="content">Write your comment</label>
+            <input name="content" type="text" class="form-control" id="content">
+            <small id="commentHelp" class="form-text text-muted">Watch your language, please</small>
+            <input name="movie_id" type="hidden" value="{{ $movie->id }}">
+        </div>
+        
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 @endsection
