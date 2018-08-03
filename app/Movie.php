@@ -14,4 +14,10 @@ class Movie extends Model
     {
         return $this->hasMany('App\Comment');
     }
+
+    public function genres()
+    {
+        return $this->belongsToMany('App\Genre');
+    }
+
 }

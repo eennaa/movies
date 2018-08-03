@@ -43,6 +43,26 @@ class MoviesController extends Controller
                             'storyline' => request('storyline'),
                             ]);
 
+        $string = request('genre');
+        $genreArray = explode(',' , $string);
+        foreach($genreArray as $g)
+        {
+            $g = trim($g, ' ');
+            if(!(\App\Genre::where('name', '=', $g)->exists()))
+            {
+                \App\Genre::create([ 'name'=> $g  ]);
+            } else {
+                $genre_id = \App\Genre::get('id');
+            }
+
+            // \App\Genre::create([ 
+            //         'movie_id' => 1,
+            //         'genre_id' => $genre_id,
+
+            // ]);         /// ovo ne znam kako da ubacim u poveznik tabelu
+        }
+
+
         return redirect('/movies');
     }
 }
