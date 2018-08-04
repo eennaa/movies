@@ -7,7 +7,17 @@
 
 @section('content')
     <h1> <div class="title"> {{ $movie->title }} </div></h1>
-    <p> {{ $movie->genre }} </p>
+    <!-- @if(count($movie->genres)) -->
+       <ul class='list-unstyled'>
+           @foreach($movie->genres as $genre)
+               <li class='btn btn-primary'>
+                   <a style='color: white;' 
+                      href='/genres/{{ $genre->name }}'>{{ $genre->name }}
+                   </a>
+               </li>
+           @endforeach
+       </ul>
+    <!-- @endif            ne znam ni cemu sluzi, PITAJ NA VA-->
     <p> {{ $movie->year }} </p>
     <p> {{ $movie->director }} </p>
     <p> {{ $movie->storyline }} </p> 

@@ -19,7 +19,7 @@ class CreateGenresTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('movie_genre', function (Blueprint $table){
+        Schema::create('genre_movie', function (Blueprint $table){
             $table->integer('movie_id');
             $table->integer('genre_id');            
             $table->primary(['movie_id', 'genre_id']);
@@ -34,7 +34,7 @@ class CreateGenresTable extends Migration
     public function down()
     {
         Schema::dropIfExists('genres');
-        Schema::dropIfExists('movie_genre');
+        Schema::dropIfExists('genre_movie');
 
     }
 }

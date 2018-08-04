@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use \App\Genre;
+
 class MoviesController extends Controller
 {
     public function index()
@@ -35,7 +37,7 @@ class MoviesController extends Controller
                                     'storyline' => 'required|max:1000',
                                     ]);
 
-        \App\Movie::create([ 
+        $movie = \App\Movie::create([ 
                             'title' => request('title'),
                             'genre' => request('genre'),
                             'year' => request('year'),
@@ -45,23 +47,24 @@ class MoviesController extends Controller
 
         $string = request('genre');
         $genreArray = explode(',' , $string);
+        $genreIdArray = array();
+
         foreach($genreArray as $g)
-        {
+        {            
             $g = trim($g, ' ');
-            if(!(\App\Genre::where('name', '=', $g)->exists()))
+            if(!(( \App\Genre::where('name', '=', $g))->exists()))
             {
-                \App\Genre::create([ 'name'=> $g  ]);
-            } else {
-                $genre_id = \App\Genre::get('id');
-            }
+                 \App\Genre::create([ 'name'=> $g  ]);
+            } 
+            
+            $genre_id = Genre::where('name',$g)->first()->id;
+            $movie_id = $movie->id;
 
-            // \App\Genre::create([ 
-            //         'movie_id' => 1,
-            //         'genre_id' => $genre_id,
-
-            // ]);         /// ovo ne znam kako da ubacim u poveznik tabelu
+            $genreIdArray[] = $genre_id;       
         }
-
+        
+        $movie -> genres()-> attach($genreIdArray);
+        
 
         return redirect('/movies');
     }
