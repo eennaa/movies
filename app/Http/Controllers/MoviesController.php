@@ -11,15 +11,17 @@ class MoviesController extends Controller
     public function index()
     {
         $movies = \App\Movie::all();
+        $lastN = \App\Movie::orderBy('id', 'desc')->take(5)->get();
 
-        return view('movies.index', compact('movies'));
+        return view('movies.index', compact('movies', 'lastN'));
     }
 
     public function show($id)
     {
         $movie = \App\Movie::with('comments')->findOrFail($id);
+        $lastN = \App\Movie::orderBy('id', 'desc')->take(5)->get();
 
-        return view('movies.show', compact('movie'));
+        return view('movies.show', compact('movie', 'lastN'));
     }
 
     public function add()

@@ -12,4 +12,8 @@
             <p>{{ str_limit($movie->storyline, $limit = 25, $end = '...') }}</p>
         </div>
     @endforeach
+
+    
 @endsection
+
+ 

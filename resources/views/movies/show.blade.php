@@ -27,7 +27,7 @@
         Comments:
         @foreach($movie->comments as $comment)
             <ul>
-                <p> {{ $comment->content }}
+                <p style="background-color: #e3f2fd;"> {{ $comment->content }}
                     <small id="timestamp" class="form-text text-muted">{{ $comment->created_at }}</small>
                 </p> 
             </ul>

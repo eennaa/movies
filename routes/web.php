@@ -23,3 +23,4 @@ Route::post('/create', 'MoviesController@create');
 Route::post('/comment/add', 'CommentsController@store');
 
 Route::get('/genres/{genre}', 'GenresController@show');
+// Route::get('', '@');
